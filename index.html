@@ -11,12 +11,11 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg-color: #050505; /* Slightly darker to make grain pop */
+            --bg-color: #050505;
             --text-primary: #f5f5f5;
             --text-secondary: #a1a1aa;
             --accent: #d4d4d8;
         }
-
         body {
             background-color: var(--bg-color);
             color: var(--text-primary);
@@ -25,8 +24,6 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-
-        /* Fixed background effects */
         .grain {
             position: fixed;
             top: 0;
@@ -38,7 +35,6 @@
             opacity: 0.04;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
-
         .glow {
             position: fixed;
             top: 0%;
@@ -50,25 +46,19 @@
             z-index: 5;
             pointer-events: none;
         }
-
-        /* Typography */
         .font-serif {
             font-family: 'Playfair Display', serif;
         }
-
-        /* Hero Animations */
         .hero-title {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
         }
-
         .hero-subtitle {
             opacity: 0;
             transform: translateY(10px);
             animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards;
         }
-
         .hero-line {
             width: 0;
             height: 1px;
@@ -76,28 +66,21 @@
             margin: 2rem auto;
             animation: expandLine 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards;
         }
-
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes expandLine {
             to { width: 80px; }
         }
-
-        /* Scroll Reveal Animations */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
             transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* Custom selection color */
         ::selection {
             background: rgba(255, 255, 255, 0.1);
             color: #fff;
@@ -105,177 +88,100 @@
     </style>
 </head>
 <body class="relative">
-    <!-- Background Effects -->
     <div class="grain"></div>
     <div class="glow"></div>
-
-    <!-- Navigation -->
     <nav class="fixed top-0 w-full p-6 md:px-12 flex justify-between items-center z-50 mix-blend-difference">
-        <a href="#" class="text-sm tracking-widest uppercase font-light text-zinc-400 hover:text-white transition-colors duration-300">
-            Tierstone
-        </a>
+        <a href="#" class="text-sm tracking-widest uppercase font-light text-zinc-400 hover:text-white transition-colors duration-300">Tierstone</a>
         <a href="https://github.com/tierstone" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors duration-300">
             <i data-lucide="github" class="w-5 h-5"></i>
         </a>
     </nav>
-
-    <!-- Hero Section -->
     <header class="relative min-h-screen flex flex-col items-center justify-center z-20 px-6">
         <div class="text-center">
-            <h1 class="font-serif text-[clamp(3rem,10vw,6rem)] font-normal tracking-tight mb-2 hero-title text-zinc-100">
-                Tierstone
-            </h1>
+            <h1 class="font-serif text-[clamp(3rem,10vw,6rem)] font-normal tracking-tight mb-2 hero-title text-zinc-100">Tierstone</h1>
             <div class="hero-line"></div>
-            <p class="text-[clamp(0.75rem,2vw,1rem)] font-light tracking-[0.3em] uppercase text-zinc-400 hero-subtitle">
-                Building what endures
-            </p>
+            <p class="text-[clamp(0.75rem,2vw,1rem)] font-light tracking-[0.3em] uppercase text-zinc-400 hero-subtitle">Building what endures</p>
         </div>
-        
-        <!-- Scroll indicator -->
         <div class="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-[fadeInUp_1s_ease_1.5s_forwards] flex flex-col items-center">
             <div class="w-[1px] h-12 bg-gradient-to-b from-zinc-500 to-transparent"></div>
         </div>
     </header>
-
-    <!-- Main Content -->
     <main class="relative z-20 w-full max-w-4xl mx-auto px-6 md:px-12 pb-32">
-        
-        <!-- About Section -->
         <section class="py-24 md:py-32 reveal">
-            <h2 class="font-serif text-3xl md:text-4xl mb-8 text-zinc-200">Who We Are</h2>
+            <h2 class="font-serif text-3xl md:text-4xl mb-8 text-zinc-200">Organization</h2>
             <div class="grid md:grid-cols-2 gap-12 text-zinc-400 font-light leading-relaxed">
                 <div>
                     <p class="mb-6">
-                        Hey there. Tierstone Foundation is basically just a group of us who love building open-source software. We started out as TuxForge, but eventually decided we wanted to stop treating it like a chaotic hobby and actually build things the right way—with solid architecture and code we can be proud of.
+                        The Tierstone Foundation is a collective of engineers dedicated to the development of principled open-source software. Originally established as TuxForge, the organization was restructured to prioritize architectural integrity, maintainable codebases, and long-term sustainability.
                     </p>
                 </div>
                 <div>
                     <p>
-                        We think open source should be more than just "hey, it compiles." We want to write code that's clean, robust, and built to survive. No more duct-tape solutions—we're here to build tools you can actually rely on without losing your mind.
+                        Our mission is to advance open-source development through rigorous engineering standards. We emphasize correctness, clarity, and resilience in every component we produce, ensuring that our contributions remain reliable foundations for future innovation.
                     </p>
                 </div>
             </div>
         </section>
-
-        <!-- Projects Section -->
         <section class="py-24 border-t border-zinc-900 reveal">
             <div class="mb-12">
-                <p class="text-xs tracking-widest uppercase text-zinc-600 mb-3">What we're working on</p>
+                <p class="text-xs tracking-widest uppercase text-zinc-600 mb-3">Flagship Initiative</p>
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                     <h2 class="font-serif text-3xl md:text-5xl text-zinc-200">Platinum (/p/OS)</h2>
                     <a href="https://github.com/tierstone/platinum" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors duration-300">
-                        <span>View Repository</span>
+                        <span>Repository</span>
                         <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"></i>
                     </a>
                 </div>
             </div>
-
             <div class="space-y-8">
-                <!-- Intro & Stack -->
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-8 backdrop-blur-sm">
                         <div class="flex items-center gap-4 mb-6">
                             <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center border border-zinc-700">
                                 <i data-lucide="terminal" class="w-5 h-5 text-zinc-300"></i>
                             </div>
-                            <h3 class="text-xl text-zinc-100 font-medium">The OS</h3>
+                            <h3 class="text-xl text-zinc-100 font-medium">System Overview</h3>
                         </div>
                         <p class="text-zinc-400 font-light leading-relaxed mb-8">
-                            A 64-bit OS written from scratch in C. It runs exclusively on QEMU x86_64. We're keeping things incredibly lean, strictly structured, and focused purely on modern architecture.
+                            Platinum is a 64-bit operating system developed from first principles in strict C99/C11. The system targets the QEMU x86_64 platform with a focus on minimalism, structural clarity, and adherence to modern systems programming practices. Development is conducted under the GPLv3 license.
                         </p>
                         <div class="flex flex-wrap gap-3">
                             <span class="text-xs font-mono px-3 py-1 rounded-full bg-zinc-800/50 text-zinc-300 border border-zinc-700/50">GPLv3</span>
-                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-zinc-800/50 text-zinc-300 border border-zinc-700/50">C99/C11 (Strict)</span>
+                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-zinc-800/50 text-zinc-300 border border-zinc-700/50">C99/C11 Strict</span>
+                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-zinc-800/50 text-zinc-300 border border-zinc-700/50">x86_64</span>
                         </div>
                     </div>
-
                     <div class="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-8 backdrop-blur-sm flex flex-col justify-center">
-                        <h3 class="text-sm font-medium text-zinc-200 uppercase tracking-widest mb-6">Tech Stack</h3>
+                        <h3 class="text-sm font-medium text-zinc-200 uppercase tracking-widest mb-6">Technical Specifications</h3>
                         <table class="w-full text-sm font-mono text-zinc-400">
                             <tbody>
                                 <tr class="border-b border-zinc-800/50"><td class="py-3 text-zinc-500">Compiler</td><td class="py-3 text-right">Clang/LLVM</td></tr>
-                                <tr class="border-b border-zinc-800/50"><td class="py-3 text-zinc-500">LibC</td><td class="py-3 text-right">musl</td></tr>
-                                <tr class="border-b border-zinc-800/50"><td class="py-3 text-zinc-500">Target</td><td class="py-3 text-right">QEMU x86_64 (q35, OVMF)</td></tr>
-                                <tr><td class="py-3 text-zinc-500">Drivers</td><td class="py-3 text-right leading-relaxed">VirtIO only<br><span class="text-xs text-zinc-600">(Net, Block, Console, RNG)</span></td></tr>
+                                <tr class="border-b border-zinc-800/50"><td class="py-3 text-zinc-500">Standard Library</td><td class="py-3 text-right">musl libc</td></tr>
+                                <tr class="border-b border-zinc-800/50"><td class="py-3 text-zinc-500">Execution Target</td><td class="py-3 text-right">QEMU x86_64 (q35, OVMF)</td></tr>
+                                <tr><td class="py-3 text-zinc-500">Virtualization Interface</td><td class="py-3 text-right leading-relaxed">VirtIO subsystem<br><span class="text-xs text-zinc-600">(Network, Block, Console, RNG)</span></td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-
-                <!-- AI Policy Warning -->
                 <div class="border border-red-900/40 bg-red-950/20 rounded-2xl p-8 backdrop-blur-sm relative overflow-hidden">
                     <div class="absolute -right-4 -top-4 opacity-10">
                         <i data-lucide="bot" class="w-32 h-32 text-red-500"></i>
                     </div>
                     <div class="relative z-10">
                         <h3 class="text-red-400 font-bold tracking-widest text-sm mb-4 flex items-center gap-2">
-                            <i data-lucide="shield-alert" class="w-5 h-5"></i> AI POLICY: HOSTILE
+                            <i data-lucide="shield-alert" class="w-5 h-5"></i> Artificial Intelligence Policy
                         </h3>
                         <p class="text-zinc-300 font-light leading-relaxed mb-4">
-                            Local OSS LLMs may be used for <em>syntax lookup</em> or <em>boilerplate scaffolding</em> only. <strong>Zero tolerance for committing unreviewed AI output.</strong> 
+                            The use of local open-source language models is permitted solely for syntactic reference and boilerplate generation. All contributions must undergo comprehensive human review. Submissions containing unverified AI-generated code will not be accepted.
                         </p>
                         <p class="text-zinc-400 font-light text-sm italic">
-                            "If your code smells like it was generated by a probabilistic token predictor without human understanding, it will be rejected. We build systems, we don't prompt them."
+                            Engineering integrity requires deliberate understanding of every component. Automated generation without human comprehension does not constitute valid contribution.
                         </p>
-                    </div>
-                </div>
-
-                <!-- Build & Roadmap -->
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Build Steps -->
-                    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-8 backdrop-blur-sm">
-                        <h3 class="text-zinc-200 font-medium mb-4">Build & Run</h3>
-                        <p class="text-zinc-500 text-xs mb-6 leading-relaxed">Prerequisites: Clang/LLVM (`clang`, `lld-link`), Python 3, QEMU, OVMF (`edk2-ovmf`).</p>
-                        
-                        <div class="space-y-4">
-                            <div class="bg-black/50 p-4 rounded-lg border border-zinc-800/50">
-                                <p class="text-zinc-600 text-xs font-mono mb-2"># Build the EFI binary</p>
-                                <code class="text-zinc-300 text-sm font-mono">python3 build.py all</code>
-                            </div>
-                            <div class="bg-black/50 p-4 rounded-lg border border-zinc-800/50">
-                                <p class="text-zinc-600 text-xs font-mono mb-2"># Launch in QEMU</p>
-                                <code class="text-zinc-300 text-sm font-mono">python3 boot.py</code>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Roadmap Status -->
-                    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-8 backdrop-blur-sm">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-zinc-200 font-medium">Roadmap</h3>
-                            <span class="text-xs bg-zinc-800 text-zinc-400 px-2 py-1 rounded">Phase 1</span>
-                        </div>
-                        
-                        <div class="space-y-6">
-                            <div>
-                                <h4 class="text-zinc-400 text-xs font-medium uppercase tracking-widest mb-3">Kernel Base</h4>
-                                <ul class="space-y-2.5 text-sm text-zinc-500 font-light">
-                                    <li class="flex items-start gap-3"><i data-lucide="check-square" class="w-4 h-4 text-zinc-300 mt-0.5 shrink-0"></i> <span class="text-zinc-300">UEFI entry & PE32+ Build pipeline</span></li>
-                                    <li class="flex items-start gap-3"><i data-lucide="check-square" class="w-4 h-4 text-zinc-300 mt-0.5 shrink-0"></i> <span class="text-zinc-300">Early serial output & QEMU scripts</span></li>
-                                    <li class="flex items-start gap-3"><i data-lucide="square" class="w-4 h-4 text-zinc-700 mt-0.5 shrink-0"></i> <span>GDT, IDT, Paging & Memory allocators</span></li>
-                                    <li class="flex items-start gap-3"><i data-lucide="square" class="w-4 h-4 text-zinc-700 mt-0.5 shrink-0"></i> <span>VirtIO-console & Core Syscalls</span></li>
-                                    <li class="flex items-start gap-3"><i data-lucide="square" class="w-4 h-4 text-zinc-700 mt-0.5 shrink-0"></i> <span>Preemptive round-robin scheduler</span></li>
-                                </ul>
-                            </div>
-
-                            <div class="pt-4 border-t border-zinc-800/50">
-                                <h4 class="text-zinc-400 text-xs font-medium uppercase tracking-widest mb-3">Up Next</h4>
-                                <ul class="space-y-2 text-sm font-light text-zinc-500">
-                                    <li><strong>Phase 2:</strong> Storage (VirtIO-block) & /p/fs</li>
-                                    <li><strong>Phase 3:</strong> Init system (pinit/psup) & POSIX shell</li>
-                                    <li><strong>Phase 4:</strong> Coreutils (cat, ls, grep, etc.)</li>
-                                    <li><strong>Phase 5:</strong> Userspace TCP/IP stack & sshd</li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
-
-    <!-- Footer -->
     <footer class="relative z-20 w-full border-t border-zinc-900 py-12 px-6">
         <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <p class="text-[10px] tracking-[0.4em] text-zinc-600 uppercase">Est. MMXXVI</p>
@@ -290,30 +196,22 @@
             </p>
         </div>
     </footer>
-
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
-
-        // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Scroll Reveal Animation Logic
         const observerOptions = {
             root: null,
             rootMargin: '0px',
             threshold: 0.15
         };
-
         const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Only animate once
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
-
         document.querySelectorAll('.reveal').forEach((element) => {
             observer.observe(element);
         });
