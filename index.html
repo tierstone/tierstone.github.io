@@ -22,6 +22,7 @@
       --soft: #6a8097;
       --accent: #5a9cf5;
       --accent-dim: rgba(90, 156, 245, 0.10);
+      --gap: 16px;
     }
     html { background: var(--bg); }
 
@@ -138,8 +139,30 @@
 
     ::selection { background: rgba(90,156,245,0.22); color: #fff; }
 
+    /* Two-col layout — consistent gap token everywhere */
+    .two-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
     @media (min-width: 1024px) {
-      .two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: start; }
+      .two-col {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: var(--gap);
+        align-items: start;
+      }
+    }
+
+    /* Stack inside right column also uses the same gap */
+    .col-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+    }
+
+    @media (min-width: 768px) {
+      .md-2col { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -152,7 +175,7 @@
       <div style="display:flex;align-items:center;gap:28px;">
         <a href="#organization">Organization</a>
         <a href="#projects">Projects</a>
-                  <a href="https://github.com/tierstone" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;">
+        <a href="https://github.com/tierstone" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;">
           <i data-lucide="github" style="width:15px;height:15px;"></i>GitHub
         </a>
       </div>
@@ -194,7 +217,7 @@
           </div>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="col-stack">
           <div class="panel" style="padding:28px 32px;">
             <p class="label" style="margin-bottom:20px;">Principles</p>
             <div style="display:flex;flex-direction:column;gap:18px;">
@@ -296,12 +319,6 @@
       <a href="https://github.com/tierstone" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--soft);transition:color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--soft)'">github.com/tierstone</a>
     </div>
   </footer>
-
-  <style>
-    @media (min-width: 768px) {
-      .md-2col { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
 
   <script>
     lucide.createIcons();
