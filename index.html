@@ -1,220 +1,315 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tierstone | Building what endures</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --bg-color: #050505;
-            --text-primary: #f5f5f5;
-            --text-secondary: #a1a1aa;
-            --accent: #d4d4d8;
-        }
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .grain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            width: 100vw;
-            z-index: 10;
-            pointer-events: none;
-            opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-        .glow {
-            position: fixed;
-            top: 0%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 60%);
-            z-index: 5;
-            pointer-events: none;
-        }
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
-        .hero-title {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
-        }
-        .hero-subtitle {
-            opacity: 0;
-            transform: translateY(10px);
-            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards;
-        }
-        .hero-line {
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--text-secondary), transparent);
-            margin: 2rem auto;
-            animation: expandLine 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.8s forwards;
-        }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes expandLine {
-            to { width: 80px; }
-        }
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        ::selection {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tierstone | Principled open-source systems engineering</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c10;
+      --panel: #0d1219;
+      --border: #1e2d3d;
+      --border-soft: #172030;
+      --text: #dde6ef;
+      --muted: #8fa3b8;
+      --soft: #6a8097;
+      --accent: #5a9cf5;
+      --accent-dim: rgba(90, 156, 245, 0.10);
+    }
+
+    html { background: var(--bg); }
+
+    body {
+      background:
+        radial-gradient(ellipse 80% 40% at 50% -10%, rgba(30, 60, 110, 0.18) 0%, transparent 70%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 20%, transparent 80%);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s cubic-bezier(.22,.68,0,1.1), transform 0.65s cubic-bezier(.22,.68,0,1.1);
+    }
+    .reveal.active { opacity: 1; transform: none; }
+
+    .panel {
+      background: linear-gradient(160deg, rgba(255,255,255,0.038) 0%, rgba(255,255,255,0.016) 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.18s, box-shadow 0.18s;
+      box-shadow: 0 0 0 0 rgba(90,156,245,0);
+    }
+    .btn-primary:hover {
+      background: #6eaaff;
+      box-shadow: 0 0 20px rgba(90,156,245,0.25);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: border-color 0.18s, color 0.18s, background 0.18s;
+    }
+    .btn-ghost:hover {
+      border-color: #3a5070;
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+    }
+
+    a { text-decoration: none; }
+
+    nav a { color: var(--muted); font-size: 14px; transition: color 0.15s; }
+    nav a:hover { color: var(--text); }
+
+    .divider { border: none; border-top: 1px solid var(--border-soft); }
+
+    .profile-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 11px 0;
+    }
+    .profile-row + .profile-row { border-top: 1px solid var(--border-soft); }
+    .profile-key { font-size: 13px; color: var(--soft); }
+    .profile-val { font-size: 13px; color: var(--text); font-weight: 500; text-align: right; }
+
+    ::selection { background: rgba(90,156,245,0.22); color: #fff; }
+
+    @media (min-width: 1024px) {
+      .two-col { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: start; }
+    }
+  </style>
 </head>
-<body class="relative">
-    <div class="grain"></div>
-    <div class="glow"></div>
-    <nav class="fixed top-0 w-full p-6 md:px-12 flex justify-between items-center z-50 mix-blend-difference">
-        <a href="#" class="text-sm tracking-widest uppercase font-light text-zinc-400 hover:text-white transition-colors duration-300">Tierstone</a>
-        <a href="https://github.com/tierstone" target="_blank" rel="noopener noreferrer" class="text-zinc-400 hover:text-white transition-colors duration-300">
-            <i data-lucide="github" class="w-5 h-5"></i>
+<body>
+  <div class="grid-bg"></div>
+
+  <nav style="position:sticky;top:0;z-index:50;border-bottom:1px solid var(--border-soft);backdrop-filter:blur(18px);background:rgba(8,12,16,0.82);">
+    <div style="max-width:1100px;margin:0 auto;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;">
+      <a href="#" style="font-weight:700;font-size:15px;color:#e8f0f8;letter-spacing:-0.01em;">Tierstone</a>
+      <div style="display:flex;align-items:center;gap:28px;">
+        <a href="#organization">Organization</a>
+        <a href="#projects">Projects</a>
+                  <a href="https://github.com/tierstone" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;">
+          <i data-lucide="github" style="width:15px;height:15px;"></i>GitHub
         </a>
-    </nav>
-    <header class="relative min-h-screen flex flex-col items-center justify-center z-20 px-6">
-        <div class="text-center">
-            <h1 class="font-serif text-[clamp(3rem,10vw,6rem)] font-normal tracking-tight mb-2 hero-title text-zinc-100">Tierstone</h1>
-            <div class="hero-line"></div>
-            <p class="text-[clamp(0.75rem,2vw,1rem)] font-light tracking-[0.3em] uppercase text-zinc-400 hero-subtitle">Building what endures</p>
+      </div>
+    </div>
+  </nav>
+
+  <header style="position:relative;z-index:10;border-bottom:1px solid var(--border-soft);padding:96px 0 80px;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 40px;">
+      <div style="max-width:680px;" class="reveal">
+        <p class="label" style="margin-bottom:18px;">Open-source systems engineering</p>
+        <h1 style="font-size:clamp(2.4rem,5vw,3.75rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;color:#eef4fb;margin-bottom:20px;">
+          Software built to stay<br>understandable.
+        </h1>
+        <p style="font-size:1.1rem;color:var(--muted);line-height:1.75;margin-bottom:32px;max-width:580px;">
+          Tierstone develops low-level, long-horizon open-source software with an emphasis on clarity, correctness, and maintainability.
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <a href="#projects" class="btn-primary">
+            View projects <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+          </a>
+          <a href="https://github.com/tierstone" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+            GitHub
+          </a>
         </div>
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-0 animate-[fadeInUp_1s_ease_1.5s_forwards] flex flex-col items-center">
-            <div class="w-[1px] h-12 bg-gradient-to-b from-zinc-500 to-transparent"></div>
+      </div>
+    </div>
+  </header>
+
+  <main style="position:relative;z-index:10;max-width:1100px;margin:0 auto;padding:80px 40px;display:flex;flex-direction:column;gap:72px;">
+
+    <section id="organization" class="reveal">
+      <div class="two-col">
+        <div class="panel" style="padding:40px;">
+          <p class="label" style="margin-bottom:14px;">Organization</p>
+          <h2 style="font-size:1.9rem;font-weight:700;letter-spacing:-0.025em;color:#eef4fb;margin-bottom:22px;line-height:1.2;">A software organization,<br>not a mood board.</h2>
+          <div style="display:flex;flex-direction:column;gap:16px;color:var(--muted);font-size:15px;line-height:1.75;">
+            <p>Tierstone is an engineering-focused open-source organization. It grew out of TuxForge and was restructured around a simpler standard: build fewer things, build them carefully, and leave them in a state other people can actually maintain.</p>
+            <p>The emphasis is on stable architecture, readable code, and systems that can be reasoned about without mythology. That means less posturing, less ornamental design language, and more straightforward engineering.</p>
+          </div>
         </div>
-    </header>
-    <main class="relative z-20 w-full max-w-4xl mx-auto px-6 md:px-12 pb-32">
-        <section class="py-24 md:py-32 reveal">
-            <h2 class="font-serif text-3xl md:text-4xl mb-8 text-zinc-200">Organization</h2>
-            <div class="grid md:grid-cols-2 gap-12 text-zinc-400 font-light leading-relaxed">
-                <div>
-                    <p class="mb-6">
-                        The Tierstone Foundation is a collective of engineers dedicated to the development of principled open-source software. Originally established as TuxForge, the organization was restructured to prioritize architectural integrity, maintainable codebases, and long-term sustainability.
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        Our mission is to advance open-source development through rigorous engineering standards. We emphasize correctness, clarity, and resilience in every component we produce, ensuring that our contributions remain reliable foundations for future innovation.
-                    </p>
-                </div>
+
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div class="panel" style="padding:28px 32px;">
+            <p class="label" style="margin-bottom:20px;">Principles</p>
+            <div style="display:flex;flex-direction:column;gap:18px;">
+              <div>
+                <p style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">Correctness first</p>
+                <p style="font-size:13.5px;color:var(--soft);line-height:1.6;">Fewer moving parts, tighter assumptions, less magic.</p>
+              </div>
+              <hr class="divider">
+              <div>
+                <p style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">Maintainability over novelty</p>
+                <p style="font-size:13.5px;color:var(--soft);line-height:1.6;">Code should still make sense six months later, not just look clever today.</p>
+              </div>
+              <hr class="divider">
+              <div>
+                <p style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;">Long-term usefulness</p>
+                <p style="font-size:13.5px;color:var(--soft);line-height:1.6;">Projects should remain solid foundations, not one-week experiments with branding.</p>
+              </div>
             </div>
-        </section>
-        <section class="py-24 border-t border-zinc-900 reveal">
-            <div class="mb-12">
-                <p class="text-xs tracking-widest uppercase text-zinc-600 mb-3">Flagship Initiative</p>
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-                    <h2 class="font-serif text-3xl md:text-5xl text-zinc-200">Platinum (/p/OS)</h2>
-                    <a href="https://github.com/tierstone/platinum" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors duration-300">
-                        <span>Repository</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="space-y-8">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-8 backdrop-blur-sm">
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center border border-zinc-700">
-                                <i data-lucide="terminal" class="w-5 h-5 text-zinc-300"></i>
-                            </div>
-                            <h3 class="text-xl text-zinc-100 font-medium">System Overview</h3>
-                        </div>
-                        <p class="text-zinc-400 font-light leading-relaxed mb-8">
-                            Platinum is a 64-bit operating system developed from first principles in strict C99/C11. The system targets the QEMU x86_64 platform with a focus on minimalism, structural clarity, and adherence to modern systems programming practices. Development is conducted under the GPLv3 license.
-                        </p>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-zinc-800/50 text-zinc-300 border border-zinc-700/50">GPLv3</span>
-                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-zinc-800/50 text-zinc-300 border border-zinc-700/50">C99/C11 Strict</span>
-                            <span class="text-xs font-mono px-3 py-1 rounded-full bg-zinc-800/50 text-zinc-300 border border-zinc-700/50">x86_64</span>
-                        </div>
-                    </div>
-                    <div class="rounded-2xl border border-zinc-800 bg-zinc-900/20 p-8 backdrop-blur-sm flex flex-col justify-center">
-                        <h3 class="text-sm font-medium text-zinc-200 uppercase tracking-widest mb-6">Technical Specifications</h3>
-                        <table class="w-full text-sm font-mono text-zinc-400">
-                            <tbody>
-                                <tr class="border-b border-zinc-800/50"><td class="py-3 text-zinc-500">Compiler</td><td class="py-3 text-right">Clang/LLVM</td></tr>
-                                <tr class="border-b border-zinc-800/50"><td class="py-3 text-zinc-500">Standard Library</td><td class="py-3 text-right">musl libc</td></tr>
-                                <tr class="border-b border-zinc-800/50"><td class="py-3 text-zinc-500">Execution Target</td><td class="py-3 text-right">QEMU x86_64 (q35, OVMF)</td></tr>
-                                <tr><td class="py-3 text-zinc-500">Virtualization Interface</td><td class="py-3 text-right leading-relaxed">VirtIO subsystem<br><span class="text-xs text-zinc-600">(Network, Block, Console, RNG)</span></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="border border-red-900/40 bg-red-950/20 rounded-2xl p-8 backdrop-blur-sm relative overflow-hidden">
-                    <div class="absolute -right-4 -top-4 opacity-10">
-                        <i data-lucide="bot" class="w-32 h-32 text-red-500"></i>
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="text-red-400 font-bold tracking-widest text-sm mb-4 flex items-center gap-2">
-                            <i data-lucide="shield-alert" class="w-5 h-5"></i> Artificial Intelligence Policy
-                        </h3>
-                        <p class="text-zinc-300 font-light leading-relaxed mb-4">
-                            The use of local open-source language models is permitted solely for syntactic reference and boilerplate generation. All contributions must undergo comprehensive human review. Submissions containing unverified AI-generated code will not be accepted.
-                        </p>
-                        <p class="text-zinc-400 font-light text-sm italic">
-                            Engineering integrity requires deliberate understanding of every component. Automated generation without human comprehension does not constitute valid contribution.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="relative z-20 w-full border-t border-zinc-900 py-12 px-6">
-        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-[10px] tracking-[0.4em] text-zinc-600 uppercase">Est. MMXXVI</p>
-            <div class="flex gap-6">
-                <a href="https://github.com/tierstone" class="text-zinc-500 hover:text-zinc-300 transition-colors">
-                    <span class="sr-only">GitHub</span>
-                    <i data-lucide="github" class="w-4 h-4"></i>
-                </a>
-            </div>
-            <p class="text-xs text-zinc-600 font-light">
-                &copy; <span id="year"></span> Tierstone Foundation. All rights reserved.
+          </div>
+
+          <div class="panel" style="padding:28px 32px;">
+            <p class="label" style="margin-bottom:12px;">Origins</p>
+            <p style="font-size:13.5px;color:var(--muted);line-height:1.65;">
+              Formerly <span style="color:var(--text);font-weight:600;">TuxForge</span>. The older name still matters, and the GitHub presence remains under that banner for now.
             </p>
+          </div>
         </div>
-    </footer>
-    <script>
-        lucide.createIcons();
-        document.getElementById('year').textContent = new Date().getFullYear();
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        document.querySelectorAll('.reveal').forEach((element) => {
-            observer.observe(element);
-        });
-    </script>
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:28px;">
+        <div>
+          <p class="label" style="margin-bottom:10px;">Project spotlight</p>
+          <h2 style="font-size:2rem;font-weight:700;letter-spacing:-0.025em;color:#eef4fb;">Platinum <span style="color:var(--soft);font-weight:400;font-size:1.3rem;">(/p/OS)</span></h2>
+        </div>
+        <a href="https://github.com/tierstone/platinum" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:500;color:var(--muted);transition:color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">
+          Repository <i data-lucide="arrow-up-right" style="width:14px;height:14px;"></i>
+        </a>
+      </div>
+
+      <div class="two-col">
+        <div class="panel" style="padding:36px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px;">
+            <div style="width:40px;height:40px;border-radius:10px;background:var(--accent-dim);border:1px solid rgba(90,156,245,0.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i data-lucide="terminal-square" style="width:18px;height:18px;color:var(--accent);"></i>
+            </div>
+            <h3 style="font-size:1.05rem;font-weight:600;color:var(--text);">Overview</h3>
+          </div>
+          <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:24px;">
+            Platinum is a 64-bit operating system written from scratch in strict C for QEMU x86_64. The work is intentionally narrow in scope: clear bring-up, disciplined systems code, and a kernel that grows from firm ground instead of vague ambition.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;">
+            <span class="chip">GPLv3</span>
+            <span class="chip">C99/C11</span>
+            <span class="chip">x86_64</span>
+            <span class="chip">QEMU</span>
+            <span class="chip">UEFI</span>
+          </div>
+        </div>
+
+        <div class="panel" style="padding:32px 36px;">
+          <p class="label" style="margin-bottom:16px;">Technical profile</p>
+          <div>
+            <div class="profile-row"><span class="profile-key">Compiler</span><span class="profile-val">Clang / LLVM</span></div>
+            <div class="profile-row"><span class="profile-key">Libc</span><span class="profile-val">musl</span></div>
+            <div class="profile-row"><span class="profile-key">Target</span><span class="profile-val">QEMU x86_64 (q35, OVMF)</span></div>
+            <div class="profile-row"><span class="profile-key">Device model</span><span class="profile-val">VirtIO</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <div class="panel" style="padding:40px 44px;">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <i data-lucide="shield" style="width:18px;height:18px;color:var(--muted);"></i>
+          </div>
+          <div>
+            <p class="label" style="margin-bottom:4px;">AI policy</p>
+            <h2 style="font-size:1.35rem;font-weight:700;color:#eef4fb;letter-spacing:-0.015em;">Human-reviewed code only</h2>
+          </div>
+        </div>
+        <hr class="divider" style="margin-bottom:22px;">
+        <div style="display:grid;gap:16px;font-size:15px;color:var(--muted);line-height:1.75;" class="md-2col">
+          <p>AI tools may be used for reference, exploration, and boilerplate generation. They are tools, not authors.</p>
+          <p>Automated or agentic workflows that generate and publish unreviewed code are not acceptable. If the contributor cannot explain the code, it does not belong in the tree.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="position:relative;z-index:10;border-top:1px solid var(--border-soft);padding:36px 0;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;">
+      <span style="font-size:13px;color:var(--soft);">Tierstone Foundation</span>
+      <span style="font-size:13px;color:var(--soft);">Formerly TuxForge</span>
+      <a href="https://github.com/tierstone" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--soft);transition:color 0.15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--soft)'">github.com/tierstone</a>
+    </div>
+  </footer>
+
+  <style>
+    @media (min-width: 768px) {
+      .md-2col { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+
+  <script>
+    lucide.createIcons();
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
 </body>
 </html>
